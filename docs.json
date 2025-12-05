@@ -1,0 +1,93 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Giving Compass Insights API",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.ico",
+  "openapi": "openapi.json",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "index"
+            ]
+          },
+          {
+            "group": "Products",
+            "pages": [
+              "documentation/feed"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Nonprofit Feed Endpoints",
+            "pages": [
+              "api-reference/endpoints/feed-posts"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/gc-logo-text-light.svg",
+    "dark": "/logo/gc-logo-text-dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "https://support.givingcompass.org/knowledge"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get API Key",
+      "href": "https://share.hsforms.com/25dhOuvFbQyaAI-fA0LsEzA32hjs"
+    }
+  },
+  "api": {
+    "baseUrl": "https://api.givingcompass.org/insights",
+    "auth": {
+      "method": "key",
+      "name": "X-API-Key"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "cursor"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/giving-compass",
+      "linkedin": "https://linkedin.com/company/giving-compass"
+    }
+  }
+}

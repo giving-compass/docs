@@ -1,0 +1,55 @@
+---
+title: "API Reference"
+description: "Access nonprofit data, impact stories, financial information, and AI-powered search capabilities"
+---
+
+## Overview
+
+The Giving Compass Insights API provides access to nonprofit data, impact stories, financial information, and AI-powered search capabilities.
+
+## Authentication
+
+All endpoints require an API key passed via the `X-API-Key` header.
+
+```bash
+X-API-Key: your_api_key_here
+```
+
+## Core Capabilities
+
+### Nonprofit Search
+Search and filter nonprofits by location, revenue, expenses, cause areas, and Charity Navigator ratings. Use Natural language search for nonprofits and content. Example queries:
+- `Find articles about clean water`
+- `Find nonprofits in Chicago with revenue over 100k`
+- `Show nonprofits in TX that help the blind`
+- `Nonprofits that are similar to JDRF`
+- `Nonprofits that focus on SDG 5 with revenue between 1M and 5M`
+
+### Impact Data
+Access AI-extracted impact stories and metrics from nonprofit annual reports:
+- **Stories**: Human transformation narratives with emotional hooks, quotes, and before/after states
+- **Metrics**: Quantitative measures (people served, meals distributed, volunteers, etc.)
+
+### Feed Data
+Access and filter nonprofit posts (articles, events, videos, job postings) from organizations:
+- **Content Types**: Filter by classification (articles, videos, events, podcasts, job postings, volunteer opportunities)
+- **Location Filtering**: Filter posts by nonprofit's city, county, state, ZIP code, or geographic radius (lat/lng)
+- **Cause Area Filtering**: Filter by NTEE codes to find posts from organizations working in specific cause areas
+
+## Base URL
+
+```
+https://api.givingcompass.org/insights
+```
+
+## Getting Started
+
+<CardGroup cols={2}>
+  <Card
+    title="Feed Endpoints"
+    icon="newspaper"
+    href="/api-reference/endpoints/feed-posts"
+  >
+    Access nonprofit-generated content including articles, videos, and events
+  </Card>
+</CardGroup>

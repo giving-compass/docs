@@ -1,0 +1,78 @@
+---
+title: "Nonprofit Feed"
+description: "Access nonprofit-generated content including articles, videos, events, and job postings"
+---
+
+## Overview
+
+The Nonprofit Feed endpoint provides access to content posted by nonprofit organizations. This includes articles, videos, events, podcasts, job postings, and volunteer opportunities.
+
+## Features
+
+- **Content Filtering**: Filter by classification type (articles, videos, events, etc.)
+- **Location-Based**: Filter posts by nonprofit location (city, state, county, ZIP)
+- **Cause Area Filtering**: Filter by NTEE codes to find content from organizations in specific cause areas
+- **Search**: Full-text search across post titles and content
+- **Pagination**: Efficiently browse through large result sets
+
+## Endpoint
+
+<Card
+  title="Get Feed Posts"
+  icon="newspaper"
+  href="/api-reference/endpoints/feed-posts"
+>
+  `GET /feed/posts`
+
+  Retrieve posts from nonprofits with flexible filtering options
+</Card>
+
+## Common Use Cases
+
+### Get Latest Articles
+
+```bash
+GET /feed/posts?classification=article&size=20
+```
+
+### Filter by Location
+
+```bash
+GET /feed/posts?state=CA&city=San%20Francisco
+```
+
+### Search for Specific Topics
+
+```bash
+GET /feed/posts?search=climate%20change
+```
+
+### Filter by Cause Area
+
+```bash
+GET /feed/posts?ntee_codes=A20,B25
+```
+
+## Response Format
+
+The endpoint returns paginated results with the following structure:
+
+```json
+{
+  "results": [
+    {
+      "id": "string",
+      "title": "string",
+      "content": "string",
+      "classification": "article",
+      "organization_name": "string",
+      "ein": "123456789",
+      "published_date": "2024-01-01T00:00:00Z",
+      "url": "string"
+    }
+  ],
+  "total": 100,
+  "page": 1,
+  "size": 20
+}
+```
