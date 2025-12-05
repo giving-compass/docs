@@ -58,17 +58,6 @@ This documentation uses Mintlify's OpenAPI integration to auto-generate API refe
 3. **Auto-Generated Pages**: Mintlify creates interactive API reference pages for each endpoint
 4. **Interactive Playground**: Users can test API calls directly in the browser
 
-### Updating the API Reference
-
-To update the API reference:
-
-1. Download the latest OpenAPI spec:
-   ```bash
-   curl https://api.givingcompass.org/openapi.json -o openapi.json
-   ```
-
-2. The documentation will automatically regenerate on the next build
-
 ## Customization
 
 ### Branding
@@ -142,7 +131,6 @@ This documentation includes:
 ### For API Support
 
 - Email: [support@givingcompass.org](mailto:support@givingcompass.org)
-- API Status: [status.givingcompass.org](https://status.givingcompass.org)
 
 ### For Documentation Issues
 

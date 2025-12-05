@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#0D9373"
   },
-  "favicon": "/favicon.ico",
+  "favicon": "/favicon.png",
   "openapi": "openapi.json",
   "navigation": {
     "tabs": [
@@ -23,7 +23,8 @@
           {
             "group": "Products",
             "pages": [
-              "documentation/feed"
+              "documentation/feed",
+              "documentation/impact"
             ]
           }
         ]
@@ -35,6 +36,15 @@
             "group": "Overview",
             "pages": [
               "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Nonprofit Impact Endpoints",
+            "pages": [
+              "api-reference/endpoints/impact-stories-by-ein",
+              "api-reference/endpoints/impact-metrics-by-ein",
+              "api-reference/endpoints/impact-stories-browse",
+              "api-reference/endpoints/impact-metrics-browse"
             ]
           },
           {
