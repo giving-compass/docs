@@ -23,8 +23,9 @@
           {
             "group": "Products",
             "pages": [
-              "documentation/feed",
-              "documentation/impact"
+              "documentation/nonprofit-search",
+              "documentation/impact",
+              "documentation/feed"
             ]
           }
         ]
@@ -36,6 +37,12 @@
             "group": "Overview",
             "pages": [
               "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Nonprofit Search Endpoints",
+            "pages": [
+              "api-reference/endpoints/nonprofit-search"
             ]
           },
           {
@@ -58,6 +65,11 @@
     ],
     "global": {
       "anchors": [
+        {
+          "anchor": "Book a Call",
+          "href": "https://meetings.hubspot.com/dale-pfeifer",
+          "icon": "phone"
+        }
       ]
     }
   },
@@ -75,7 +87,7 @@
     "primary": {
       "type": "button",
       "label": "Get API Key",
-      "href": "https://share.hsforms.com/25dhOuvFbQyaAI-fA0LsEzA32hjs"
+      "href": "https://solutions.givingcompass.org/request-api-key"
     }
   },
   "api": {

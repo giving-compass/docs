@@ -1,0 +1,112 @@
+---
+title: "Nonprofit Search"
+description: "Find nonprofits using natural language queries with AI-powered search"
+---
+
+## Overview
+
+The Nonprofit Search product lets you find organizations using plain English queries. Instead of building complex filter combinations, describe what you're looking for and the AI extracts intent, location, financial criteria, and cause areas automatically.
+
+## Key Features
+
+- **Natural Language Queries**: Search using phrases like "education nonprofits in Texas with revenue over $1M"
+- **AI Intent Processing**: Automatically extracts filters from your query—location, revenue ranges, cause areas, and more
+- **Flexible Filtering**: Combine natural language with explicit filters for precise results
+- **Session Context**: Maintain conversation context across multiple queries for refined searches
+- **Relevance Scoring**: Results ranked by semantic similarity to your query
+
+## How It Works
+
+When you submit a query, the API:
+
+1. Parses your natural language input using an LLM
+2. Extracts structured filters (location, revenue, NTEE codes, SDGs)
+3. Performs a vector search against nonprofit descriptions
+4. Returns ranked results with extracted intent details
+
+## Use Cases
+
+### Prospect Research
+
+Quickly identify potential grantees or partners matching specific criteria without building complex queries.
+
+```bash
+GET /beta/nonprofits/search?q=youth mentoring programs in urban areas with budget under 500k
+```
+
+### Portfolio Analysis
+
+Find organizations similar to ones you already work with by describing their characteristics.
+
+```bash
+GET /beta/nonprofits/search?q=nonprofits similar to food banks serving rural communities
+```
+
+### Geographic Discovery
+
+Locate organizations in specific regions for targeted outreach or reporting.
+
+```bash
+GET /beta/nonprofits/search?q=environmental conservation groups in the Pacific Northwest
+```
+
+### Financial Screening
+
+Filter by organization size to match your funding criteria or partnership requirements.
+
+```bash
+GET /beta/nonprofits/search?q=healthcare nonprofits with revenue between 1M and 10M
+```
+
+## Example Queries
+
+The AI understands a variety of query patterns:
+
+| Query | Extracted Filters |
+|-------|-------------------|
+| "Animal shelters in Los Angeles" | cause: animal welfare, city: Los Angeles |
+| "Large education nonprofits in NY" | NTEE: B (education), state: NY, size: large |
+| "Climate organizations with 4-star rating" | cause: environment, min_rating: 4 |
+| "SDG 4 focused nonprofits under $500k revenue" | SDG: 4, max_revenue: 500000 |
+
+## Response Format
+
+The endpoint returns matched nonprofits along with the interpreted intent:
+
+```json
+{
+  "intentDetails": {
+    "intent": "nonprofit_search",
+    "cause": "education",
+    "state": "CA",
+    "min_revenue": 100000
+  },
+  "nonprofits": [
+    {
+      "ein": "123456789",
+      "name": "Example Education Foundation",
+      "summary": "Providing educational resources...",
+      "city": "San Francisco",
+      "state": "CA",
+      "revenueGrandTotal": 250000,
+      "vectorScore": 0.85
+    }
+  ]
+}
+```
+
+## Endpoint
+
+<Card
+  title="Nonprofit Search API"
+  icon="magnifying-glass"
+  href="/api-reference/endpoints/nonprofit-search"
+>
+  `GET /beta/nonprofits/search`
+
+  Search nonprofits using natural language with AI-powered intent extraction
+</Card>
+
+<Note>
+  This endpoint is in beta. Parameters and response format may change.
+</Note>

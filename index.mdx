@@ -7,13 +7,13 @@ description: "Welcome to the Giving Compass Insights API documentation"
 
 ## What You Can Do
 
-<Columns cols={2}>
+<Columns cols={3}>
   <Card
-    title="Nonprofit Feed"
-    icon="rss"
-    href="/documentation/feed"
+    title="Nonprofit Search"
+    icon="magnifying-glass"
+    href="/documentation/nonprofit-search"
   >
-    Browse articles, videos, events, and job postings from nonprofits
+    Find nonprofits using natural language queries with AI-powered search
   </Card>
   <Card
     title="Nonprofit Impact"
@@ -22,5 +22,32 @@ description: "Welcome to the Giving Compass Insights API documentation"
   >
     Access impact stories and metrics extracted from nonprofit annual reports
   </Card>
+  <Card
+    title="Nonprofit Feed"
+    icon="rss"
+    href="/documentation/feed"
+  >
+    Browse articles, videos, events, and job postings from nonprofits
+  </Card>
 </Columns>
+
+## Quick Start
+
+Get up and running in minutes:
+
+<Steps>
+  <Step title="Get your API key">
+    [Request an API key](https://solutions.givingcompass.org/request-api-key) to authenticate your requests.
+  </Step>
+  <Step title="Make your first request">
+    Include your key in the `X-API-Key` header:
+    ```bash
+    curl -X GET "https://api.givingcompass.org/insights/beta/nonprofits/search?q=education nonprofits in California" \
+      -H "X-API-Key: your_api_key_here"
+    ```
+  </Step>
+  <Step title="Explore the data">
+    Browse the [API Reference](/api-reference/overview) for all available endpoints and parameters.
+  </Step>
+</Steps>
 
