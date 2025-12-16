@@ -111,5 +111,10 @@
       "github": "https://github.com/giving-compass",
       "linkedin": "https://linkedin.com/company/giving-compass"
     }
+  },
+  "integrations": {
+    "gtm": {
+      "tagId": "GTM-P4TFJ267"
+    }
   }
 }
