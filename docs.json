@@ -21,11 +21,22 @@
             ]
           },
           {
-            "group": "Products",
+            "group": "Nonprofit Discovery",
             "pages": [
               "documentation/nonprofit-search",
-              "documentation/nonprofit-details",
-              "documentation/impact",
+              "documentation/nonprofit-typeahead",
+              "documentation/nonprofit-details"
+            ]
+          },
+          {
+            "group": "Impact Report Insights",
+            "pages": [
+              "documentation/impact"
+            ]
+          },
+          {
+            "group": "Nonprofit Newsfeed",
+            "pages": [
               "documentation/feed"
             ]
           }
@@ -41,19 +52,15 @@
             ]
           },
           {
-            "group": "Nonprofit Search Endpoints",
+            "group": "Nonprofit Endpoints",
             "pages": [
-              "api-reference/endpoints/nonprofit-search"
-            ]
-          },
-          {
-            "group": "Nonprofit Details Endpoints",
-            "pages": [
+              "api-reference/endpoints/nonprofit-search",
+              "api-reference/endpoints/nonprofit-typeahead",
               "api-reference/endpoints/nonprofit-details"
             ]
           },
           {
-            "group": "Nonprofit Impact Endpoints",
+            "group": "Impact Endpoints",
             "pages": [
               "api-reference/endpoints/impact-stories-by-ein",
               "api-reference/endpoints/impact-metrics-by-ein",
@@ -62,7 +69,7 @@
             ]
           },
           {
-            "group": "Nonprofit Feed Endpoints",
+            "group": "Feed Endpoints",
             "pages": [
               "api-reference/endpoints/feed-posts"
             ]

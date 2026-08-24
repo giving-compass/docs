@@ -1,0 +1,98 @@
+---
+title: "Nonprofit Typeahead"
+description: "Search-as-you-type nonprofit suggestions by name or EIN for autocomplete experiences"
+---
+
+## Overview
+
+The Nonprofit Typeahead product powers autocomplete in your application. As a user types, each keystroke returns ranked nonprofit suggestions matched by organization name—or by EIN, with or without dashes. It's built for speed and forgiving input, so users find the right organization in a few characters even with a typo.
+
+## Key Features
+
+- **Search-as-You-Type**: Fast prefix matching designed to run on every keystroke
+- **Name and EIN Matching**: Matches organization names and alternate names, or an EIN typed as `12-3456789` or `123456789`
+- **Typo Tolerance**: A single typo still finds the intended organization
+- **Alternate Names Included**: Matches IRS Business Master File alternate names, not just legal names
+- **Display-Ready Results**: Names come back title-cased and ready to render in a dropdown
+- **Active Organizations Only**: Suggestions cover active 501(c)(3) organizations
+
+## How It Works
+
+Send the user's input as the `q` parameter (2–100 characters) and render the ranked suggestions:
+
+```bash
+GET /typeahead/nonprofits?q=red cro&limit=5
+```
+
+Behind the scenes, the API runs a weighted completion suggester over active 501(c)(3) legal names and BMF alternate names, tolerating one typo. If the input looks like an EIN, the matching nonprofit is returned directly—making this a fuzzy EIN lookup as well.
+
+## Use Cases
+
+### Donation and Grant Forms
+
+Let donors or grant managers pick the right organization from a dropdown instead of typing a full legal name.
+
+### Fuzzy EIN Lookup
+
+Accept an EIN in any format the user types—`12-3456789` or `123456789`—and resolve it to an organization. Then pass the returned EIN to [Nonprofit Details](/documentation/nonprofit-details) for the full profile.
+
+### Data Entry Validation
+
+Confirm an organization exists (and is active) as users enter it, catching misspellings before records are saved.
+
+## Response Format
+
+```json
+{
+  "query": "red cro",
+  "count": 2,
+  "results": [
+    {
+      "ein": "530196605",
+      "name": "American National Red Cross",
+      "city": "Washington",
+      "state": "DC",
+      "score": 42.0
+    },
+    {
+      "ein": "030179419",
+      "name": "Red Crow Foundation",
+      "city": "Burlington",
+      "state": "VT",
+      "score": 18.5
+    }
+  ]
+}
+```
+
+<Warning>
+  EINs are returned as strings and may carry leading zeros (e.g. `"030179419"`). Never convert them to integers. The `score` field is a ranking weight for debugging—don't display it to end users.
+</Warning>
+
+<Note>
+  A `state` parameter is accepted for forward-compatibility but is currently ignored—results are not state-filtered yet.
+</Note>
+
+## Pairs Well With
+
+Typeahead returns the EIN; Nonprofit Details returns everything else. A typical flow: the user picks a suggestion from your dropdown, then your app fetches the full profile.
+
+<Card
+  title="Nonprofit Details"
+  icon="building-ngo"
+  href="/documentation/nonprofit-details"
+>
+  Fetch the complete profile for a selected suggestion using its EIN
+</Card>
+
+## Endpoint
+
+<Card
+  title="Nonprofit Typeahead API"
+  icon="keyboard"
+  href="/api-reference/endpoints/nonprofit-typeahead"
+>
+  `GET /typeahead/nonprofits`
+
+  Ranked search-as-you-type suggestions matched by nonprofit name or EIN
+</Card>
