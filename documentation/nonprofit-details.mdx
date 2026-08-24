@@ -9,7 +9,7 @@ The Nonprofit Details product gives you the full profile of any U.S. nonprofit u
 
 ## Key Features
 
-- **Complete Profiles**: Name, mission summary, website, logo, and contact address in a single response
+- **Complete Profiles**: Name, mission summary, website, and contact address in a single response
 - **Financial Snapshot**: Latest reported total revenue, net assets, and filing year from IRS data
 - **Cause Classification**: NTEE code, issue area, and mapped UN Sustainable Development Goals (SDGs)
 - **Trust Signals**: Giving Compass vetting status, IRS ruling date, and a link to the source IRS filing
@@ -32,7 +32,7 @@ GET /nonprofits/details/530196605
 
 ### Organization Profile Pages
 
-Build rich nonprofit profile pages in your product—mission, logo, location, financials, and donation link—from a single API call.
+Build rich nonprofit profile pages in your product—mission, location, financials, and donation link—from a single API call.
 
 ### Due Diligence
 
@@ -73,7 +73,6 @@ The endpoint returns a single nonprofit profile:
   "irsRulingDate": "1938-03",
   "irsFilingUrl": "https://apps.irs.gov/...",
   "sdgs": [3, 11],
-  "logo": "https://cdn.givingcompass.org/logos/530196605.png",
   "formType": "990",
   "gcVideoUrl": null,
   "gcDonationUrl": "https://www.redcross.org/donate",
