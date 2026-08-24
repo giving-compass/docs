@@ -1,0 +1,134 @@
+---
+title: "Typeahead Nonprofits"
+description: "Search-as-you-type nonprofit suggestions matched by name or EIN"
+api: "GET /typeahead/nonprofits"
+---
+
+Search-as-you-type nonprofit lookup. Prefix-matches active 501(c)(3) legal names and IRS Business Master File alternate names using a weighted completion suggester, tolerating a single typo. Input that looks like an EIN—with or without dashes—returns that nonprofit directly.
+
+## Authorizations
+
+<ParamField header="X-API-Key" type="string" required>
+  API key authentication. Required for all endpoints.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="q" type="string" required>
+  What the user typed (2–100 characters): a nonprofit name prefix, or an EIN with or without dashes (e.g. `12-3456789` or `123456789`).
+</ParamField>
+
+<ParamField query="limit" type="integer" default="10">
+  Maximum number of suggestions to return (1–25).
+</ParamField>
+
+<ParamField query="state" type="string">
+  2-letter state code. Accepted for forward-compatibility but **currently ignored**—results are not state-filtered yet.
+</ParamField>
+
+## Response
+
+<ResponseField name="query" type="string" required>
+  The query string that was matched, echoed back.
+</ResponseField>
+
+<ResponseField name="count" type="integer" required>
+  Number of suggestions returned.
+</ResponseField>
+
+<ResponseField name="results" type="object[]" required>
+  Ranked nonprofit suggestions, best match first.
+
+  <Expandable title="properties">
+    <ResponseField name="ein" type="string" required>
+      The organization's 9-digit EIN as a string, with leading zeros preserved (e.g. `"030179419"`). Never coerce to an integer.
+    </ResponseField>
+
+    <ResponseField name="name" type="string" required>
+      Display-ready, title-cased organization name.
+    </ResponseField>
+
+    <ResponseField name="city" type="string | null">
+      Organization city, when available.
+    </ResponseField>
+
+    <ResponseField name="state" type="string | null">
+      2-letter state code, when available.
+    </ResponseField>
+
+    <ResponseField name="score" type="number" required>
+      Completion-suggester ranking weight, exposed for ranking and debugging only—don't surface it to end users.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+Requests that fail validation (e.g. `q` shorter than 2 characters, `limit` outside 1–25) return a `422` validation error.
+
+<RequestExample>
+
+```bash cURL
+curl --request GET \
+  --url 'https://api.givingcompass.org/insights/typeahead/nonprofits?q=red%20cro&limit=5' \
+  --header 'X-API-Key: <api-key>'
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.givingcompass.org/insights/typeahead/nonprofits",
+    params={"q": "red cro", "limit": 5},
+    headers={"X-API-Key": "<api-key>"},
+)
+print(response.json())
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://api.givingcompass.org/insights/typeahead/nonprofits?" +
+    new URLSearchParams({ q: "red cro", limit: "5" }),
+  { headers: { "X-API-Key": "<api-key>" } }
+);
+const data = await response.json();
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```json 200
+{
+  "query": "red cro",
+  "count": 2,
+  "results": [
+    {
+      "ein": "530196605",
+      "name": "American National Red Cross",
+      "city": "Washington",
+      "state": "DC",
+      "score": 42.0
+    },
+    {
+      "ein": "030179419",
+      "name": "Red Crow Foundation",
+      "city": "Burlington",
+      "state": "VT",
+      "score": 18.5
+    }
+  ]
+}
+```
+
+```json 422
+{
+  "detail": [
+    {
+      "loc": ["query", "q"],
+      "msg": "String should have at least 2 characters",
+      "type": "string_too_short"
+    }
+  ]
+}
+```
+
+</ResponseExample>
