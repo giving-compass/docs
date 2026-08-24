@@ -24,6 +24,7 @@
             "group": "Products",
             "pages": [
               "documentation/nonprofit-search",
+              "documentation/nonprofit-details",
               "documentation/impact",
               "documentation/feed"
             ]
@@ -43,6 +44,12 @@
             "group": "Nonprofit Search Endpoints",
             "pages": [
               "api-reference/endpoints/nonprofit-search"
+            ]
+          },
+          {
+            "group": "Nonprofit Details Endpoints",
+            "pages": [
+              "api-reference/endpoints/nonprofit-details"
             ]
           },
           {

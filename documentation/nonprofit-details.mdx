@@ -1,0 +1,98 @@
+---
+title: "Nonprofit Details"
+description: "Retrieve a complete nonprofit profile by EIN, including mission, location, financials, and impact"
+---
+
+## Overview
+
+The Nonprofit Details product gives you the full profile of any U.S. nonprofit using its EIN (Employer Identification Number). One request returns everything you need to display or evaluate an organization: identity, mission summary, address, cause areas, financials, IRS filing information, and Giving Compass vetting status.
+
+## Key Features
+
+- **Complete Profiles**: Name, mission summary, website, logo, and contact address in a single response
+- **Financial Snapshot**: Latest reported total revenue, net assets, and filing year from IRS data
+- **Cause Classification**: NTEE code, issue area, and mapped UN Sustainable Development Goals (SDGs)
+- **Trust Signals**: Giving Compass vetting status, IRS ruling date, and a link to the source IRS filing
+- **Impact Context**: An AI-generated impact summary describing the organization's outcomes
+- **Geolocation**: Latitude and longitude for mapping and proximity features
+
+## How It Works
+
+Every U.S. nonprofit is identified by a unique 9-digit EIN assigned by the IRS. Pass that EIN in the request path and the API returns the organization's full profile:
+
+```bash
+GET /nonprofits/details/530196605
+```
+
+<Note>
+  The EIN must be exactly 9 digits with no hyphens or spaces. For example, use `530196605`, not `53-0196605`. Requests with any other format are rejected with a validation error.
+</Note>
+
+## Use Cases
+
+### Organization Profile Pages
+
+Build rich nonprofit profile pages in your product—mission, logo, location, financials, and donation link—from a single API call.
+
+### Due Diligence
+
+Verify an organization's identity, IRS standing, and financial scale before recommending it to donors or approving a grant.
+
+### Search-to-Detail Workflows
+
+Pair with [Nonprofit Search](/documentation/nonprofit-search): search results return EINs, then fetch full details for the organization a user selects.
+
+### Data Enrichment
+
+Enrich your existing donor or grantee records with cause classifications, SDG mappings, and up-to-date financials keyed by EIN.
+
+## Response Format
+
+The endpoint returns a single nonprofit profile:
+
+```json
+{
+  "ein": "530196605",
+  "name": "American National Red Cross",
+  "alt_name": null,
+  "url": "https://www.redcross.org",
+  "summary": "Prevents and alleviates human suffering in the face of emergencies...",
+  "streetAddress": "431 18th St NW",
+  "city": "Washington",
+  "state": "DC",
+  "zipCode5": "20006",
+  "ntee": "P12",
+  "issueArea": "Human Services",
+  "yearFounded": 1900,
+  "filingYear": 2023,
+  "revenueGrandTotal": 3120000000,
+  "netAssets": 2450000000,
+  "foundation": false,
+  "inactive": false,
+  "gcVetted": true,
+  "irsRulingDate": "1938-03",
+  "irsFilingUrl": "https://apps.irs.gov/...",
+  "sdgs": [3, 11],
+  "logo": "https://cdn.givingcompass.org/logos/530196605.png",
+  "formType": "990",
+  "gcVideoUrl": null,
+  "gcDonationUrl": "https://www.redcross.org/donate",
+  "lat": 38.9007,
+  "lng": -77.0417,
+  "impactSummary": "Responds to an average of 65,000 disasters annually..."
+}
+```
+
+Fields that are not available for a given organization are returned as `null`.
+
+## Endpoint
+
+<Card
+  title="Nonprofit Details API"
+  icon="building-ngo"
+  href="/api-reference/endpoints/nonprofit-details"
+>
+  `GET /nonprofits/details/{ein}`
+
+  Retrieve the full profile of a nonprofit by its 9-digit EIN
+</Card>
