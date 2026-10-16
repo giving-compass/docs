@@ -9,9 +9,10 @@ The Nonprofit Details product gives you the full profile of any U.S. nonprofit u
 
 ## Key Features
 
-- **Complete Profiles**: Name, mission summary, website, and contact address in a single response
-- **Financial Snapshot**: Latest reported total revenue, net assets, and filing year from IRS data
-- **Cause Classification**: NTEE code, issue area, and mapped UN Sustainable Development Goals (SDGs)
+- **Complete Profiles**: Name, mission summary, original mission statement, website, and contact address (including county) in a single response
+- **Financial Snapshot**: Latest reported total revenue, total expenses, net assets, employee count, and filing year from IRS data
+- **Organization Details**: Organization type, legal form, category group, and principal and business officer contacts
+- **Cause Classification**: NTEE code with its plain-language description and definition, issue area, and mapped UN Sustainable Development Goals (SDGs)
 - **Trust Signals**: Giving Compass vetting status, IRS ruling date, and a link to the source IRS filing
 - **Impact Context**: An AI-generated impact summary describing the organization's outcomes
 - **Geolocation**: Latitude and longitude for mapping and proximity features
@@ -53,36 +54,91 @@ The endpoint returns a single nonprofit profile:
 ```json
 {
   "ein": "530196605",
-  "name": "American National Red Cross",
-  "alt_name": null,
-  "url": "https://www.redcross.org",
-  "summary": "Prevents and alleviates human suffering in the face of emergencies...",
-  "streetAddress": "431 18th St NW",
-  "city": "Washington",
+  "name": "AMERICAN NATIONAL RED CROSS & ITS CONSTITUENT CHAPTERS AND BRANCHES",
+  "altName": "SHARED SERVICES CENTER",
+  "url": "www.redcross.org",
+  "summary": "The American National Red Cross provides national and international disaster relief, collects and distributes approximately 40 percent of the nation's blood supply...",
+  "originalMissionStatement": "THE AMERICAN RED CROSS PREVENTS AND ALLEVIATES HUMAN SUFFERING IN THE FACE OF EMERGENCIES BY MOBILIZING THE POWER OF VOLUNTEERS AND THE GENEROSITY OF DONORS.",
+  "streetAddress": "430 17TH ST NW",
+  "city": "WASHINGTON",
+  "county": "District of Columbia",
   "state": "DC",
   "zipCode5": "20006",
-  "ntee": "P12",
-  "issueArea": "Human Services",
+  "ntee": "P210",
+  "nteeDetails": {
+    "code": "P21",
+    "description": "American Red Cross",
+    "definition": "Separately incorporated, local chapters of the American Red Cross."
+  },
+  "issueArea": "Human Services: General",
   "yearFounded": 1900,
-  "filingYear": 2023,
-  "revenueGrandTotal": 3120000000,
-  "netAssets": 2450000000,
+  "filingYear": 2024,
+  "expensesGrandTotal": 3285860000.0,
+  "revenueGrandTotal": 3916980000.0,
+  "netAssets": 4116230000.0,
   "foundation": false,
   "inactive": false,
-  "gcVetted": true,
-  "irsRulingDate": "1938-03",
-  "irsFilingUrl": "https://apps.irs.gov/...",
+  "gcVetted": false,
+  "irsRulingDate": "1938-12-01",
+  "irsFilingUrl": null,
+  "categoryGroup": "Human Services",
+  "deductibility": "1",
+  "organizationForm": "Corporation",
+  "employees": 17907.0,
+  "organizationType": "501(C)(3)",
+  "principalOfficerName": null,
+  "businessOfficerName": null,
+  "businessOfficerPhone": null,
   "sdgs": [3, 11],
   "formType": "990",
   "gcVideoUrl": null,
-  "gcDonationUrl": "https://www.redcross.org/donate",
-  "lat": 38.9007,
-  "lng": -77.0417,
-  "impactSummary": "Responds to an average of 65,000 disasters annually..."
+  "gcDonationUrl": "https://www.redcross.org/donate/donation.html",
+  "gcImpactUrl": null,
+  "lat": 38.8985,
+  "lng": -77.0412,
+  "sources": {
+    "ai": {
+      "website_url": {
+        "value": "https://www.example.org",
+        "source": "https://www.example.org",
+        "reasoning": "Explanation of how the value was verified...",
+        "date_updated": "2026-01-01T00:00:00Z"
+      },
+      "donation_url": {
+        "value": "https://www.example.org/donate",
+        "source": "https://www.example.org/donate",
+        "reasoning": "Explanation of how the value was verified...",
+        "date_updated": "2026-01-01T00:00:00Z"
+      }
+    },
+    "irs": {
+      "website_url": {
+        "value": "WWW.EXAMPLE.ORG"
+      }
+    },
+    "manual": null
+  },
+  "socialAccounts": {
+    "tiktok": "@americanredcross",
+    "threads": "@americanredcross",
+    "twitter": "@redcross",
+    "facebook": "redcross",
+    "linkedin": "company/american-red-cross",
+    "instagram": "americanredcross"
+  },
+  "cnScore": 91.0,
+  "cnRating": 4,
+  "cnSize": "SUPER",
+  "vectorScore": null,
+  "impactSummary": null
 }
 ```
 
 Fields that are not available for a given organization are returned as `null`.
+
+<Note>
+  `nteeDetails` describes the organization's NTEE category. Codes longer than 3 characters resolve to their 3-character parent category, so `nteeDetails.code` may differ from `ntee`. It is `null` when the code isn't in the NTEE list.
+</Note>
 
 ## Endpoint
 
